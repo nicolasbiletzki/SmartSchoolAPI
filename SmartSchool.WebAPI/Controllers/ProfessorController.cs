@@ -15,10 +15,12 @@ namespace SmartSchool.WebAPI.Controllers
     {
 
         private readonly SmartContext _context;
+        private readonly IRepository _repo;
 
-        public ProfessorController(SmartContext context) 
+        public ProfessorController(SmartContext context, IRepository repo) 
         {
             _context = context;
+            _repo = repo;
         }
 
 
@@ -47,9 +49,9 @@ namespace SmartSchool.WebAPI.Controllers
         [HttpPost]
         public IActionResult Post(Professor professor)
         {
-            _context.Add(professor);
-            _context.SaveChanges();
-            return Ok(professor);
+            _repo.Add(professor);
+            if (_repo.SaveChanges()) return Ok(professor);
+            return BadRequest("Professor não cadastrado");
         }
 
         [HttpPut("{id}")]
