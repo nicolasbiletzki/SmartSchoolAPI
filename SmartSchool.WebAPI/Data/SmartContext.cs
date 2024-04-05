@@ -1,19 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartSchool.WebAPI.Models;
-using System.Data.Common;
 
 namespace SmartSchool.WebAPI.Data
 {
-    public class DataContext : DbContext
+    public class SmartContext : DbContext
     {
 
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        public SmartContext(DbContextOptions<SmartContext> options) : base(options)
         {
-                
+            
         }
+
         public DbSet<Aluno> Alunos { get; set; }
+
         public DbSet<Professor> Professores { get; set; }
+
         public DbSet<Disciplina> Disciplinas { get; set; }
+
         public DbSet<AlunoDisciplina> AlunosDisciplinas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -76,5 +79,6 @@ namespace SmartSchool.WebAPI.Data
                     new AlunoDisciplina() {AlunoId = 7, DisciplinaId = 5 }
                 });
         }
+
     }
 }

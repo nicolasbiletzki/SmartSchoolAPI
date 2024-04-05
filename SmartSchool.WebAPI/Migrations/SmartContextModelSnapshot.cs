@@ -7,8 +7,8 @@ using SmartSchool.WebAPI.Data;
 
 namespace SmartSchool.WebAPI.Migrations
 {
-    [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(SmartContext))]
+    partial class SmartContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

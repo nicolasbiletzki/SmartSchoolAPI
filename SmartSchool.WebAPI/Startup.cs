@@ -24,12 +24,12 @@ namespace SmartSchool.WebAPI
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(
-                context => context.UseSqlite(Configuration.GetConnectionString("Default"))
-                );
+            services.AddDbContext<SmartContext>(context =>
+                context.UseSqlite(Configuration.GetConnectionString("Teste")));
+
             services.AddControllers();
         }
 

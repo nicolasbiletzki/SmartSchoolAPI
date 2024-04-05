@@ -8,8 +8,8 @@ using SmartSchool.WebAPI.Data;
 
 namespace SmartSchool.WebAPI.Migrations
 {
-    [DbContext(typeof(DataContext))]
-    [Migration("20240405010608_init")]
+    [DbContext(typeof(SmartContext))]
+    [Migration("20240405120232_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
