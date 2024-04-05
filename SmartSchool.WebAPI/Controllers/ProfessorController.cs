@@ -1,4 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using SmartSchool.WebAPI.Data;
+using SmartSchool.WebAPI.Models;
+using SQLitePCL;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,24 +13,73 @@ namespace SmartSchool.WebAPI.Controllers
     [ApiController]
     public class ProfessorController : ControllerBase
     {
-        // GET: api/<ValuesController>
+
+        private readonly SmartContext _context;
+
+        public ProfessorController(SmartContext context) 
+        {
+            _context = context;
+        }
+
+
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok("Professor: testando");
+            return Ok(_context.Professores);
         }
 
-        // GET api/<ValuesController>/5
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [HttpGet("byId/{id}")]
+        public IActionResult GetById(int id)
         {
-            return Ok("Professor: teste1, teste2, teste3");
+            var professor = _context.Professores.AsNoTracking().FirstOrDefault(p => p.Id == id);
+            if (professor == null) return BadRequest("Professor não encontrado");
+            return Ok(professor);
         }
 
-        // POST api/<ValuesController>
+        [HttpGet("byName")]
+        public IActionResult GetByName(string nome)
+        {
+            var professor = _context.Professores.AsNoTracking().FirstOrDefault(p => p.Nome.Contains(nome));
+            if (professor == null) return BadRequest("Professor não encontrado");
+            return Ok(professor);
+        }
+
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post(Professor professor)
         {
+            _context.Add(professor);
+            _context.SaveChanges();
+            return Ok(professor);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, Professor professor)
+        {
+            var professor1 = _context.Professores.AsNoTracking().FirstOrDefault(p => p.Id == id);
+            if (professor1 == null) return BadRequest("Professor não encontrado");
+            _context.Update(professor);
+            _context.SaveChanges();
+            return Ok(professor);
+        }
+
+        [HttpPatch("{id}")]
+        public IActionResult Patch(int id, Professor professor)
+        {
+            var professor1 = _context.Professores.AsNoTracking().FirstOrDefault(p => p.Id == id);
+            if (professor1 == null) return BadRequest("Professor não encontrado");
+            _context.Update(professor);
+            _context.SaveChanges();
+            return Ok(professor);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var professor = _context.Professores.FirstOrDefault(p => p.Id == id);
+            if (professor == null) return BadRequest("Professor não encontrado");
+            _context.Remove(professor);
+            _context.SaveChanges();
+            return Ok("Professor excluído.");
         }
 
     }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SmartSchool.WebAPI.Data;
 using SmartSchool.WebAPI.Models;
 
@@ -51,7 +52,7 @@ namespace SmartSchool.WebAPI.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, Aluno aluno)
         {
-            var aluno1 = _context.Alunos.FirstOrDefault(a => a.Id == id);
+            var aluno1 = _context.Alunos.AsNoTracking().FirstOrDefault(a => a.Id == id);
             if (aluno1 == null) return BadRequest("Aluno não encontrado");
             _context.Update(aluno);
             _context.SaveChanges();
@@ -61,7 +62,7 @@ namespace SmartSchool.WebAPI.Controllers
         [HttpPatch("{id}")]
         public IActionResult Patch(int id, Aluno aluno)
         {
-            var aluno1 = _context.Alunos.FirstOrDefault(a => a.Id == id);
+            var aluno1 = _context.Alunos.AsNoTracking().FirstOrDefault(a => a.Id == id);
             if (aluno1 == null) return BadRequest("Aluno não encontrado");
             _context.Update(aluno);
             _context.SaveChanges();
