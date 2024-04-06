@@ -4,16 +4,13 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:40687",
-      "sslPort": 44394
+      "applicationUrl": "http://localhost:40687"
     }
   },
   "profiles": {
     "SmartSchool.WebAPI": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
-      "launchUrl": "api/aluno",
       "applicationUrl": "https://localhost:7270;http://localhost:5032",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
@@ -21,8 +18,6 @@
     },
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "api/aluno",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

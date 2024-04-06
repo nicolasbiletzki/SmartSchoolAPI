@@ -1,7 +1,7 @@
 ﻿using SmartSchool.WebAPI.Models;
 
 namespace SmartSchool.WebAPI.Dto
-{
+{   
     public class AlunoDto
     {
         public int? Id { get; set; }
